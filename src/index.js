@@ -43,6 +43,7 @@ function onSubmitForm(event) {
             const searchResults = data.hits;
             if (data.totalHits === 0) {
                 Notify.failure('Sorry, there are no images matching your search query. Please try again.', paramsForNotify);
+                btnLoadMore.classList.add('is-hidden');
             } else {
                 Notify.info(`Hooray! We found ${data.totalHits} images.`, paramsForNotify);
                 createMarkup(searchResults);
