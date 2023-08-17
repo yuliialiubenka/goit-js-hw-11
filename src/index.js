@@ -92,5 +92,5 @@ function showLoadMorePage() {
 };
 
 function checkIfEndOfPage() {
-  return window.innerHeight + window.scrollY > document.documentElement.scrollHeight;
+  return window.innerHeight + window.scrollY + 1 >= document.documentElement.scrollHeight;
 }
