@@ -82,7 +82,11 @@ async function addImagesToPage(searchText) {
         let totalHits = imgItems.totalHits;
 
         if (currentPage === 1) {
-            Notify.success(`Hooray! We have found ${totalHits} images.`, paramsForNotify);
+            if (totalHits === 1) {
+                Notify.success(`Hooray! We have found 1 image.`, paramsForNotify);
+            } else {
+                Notify.success(`Hooray! We have found ${totalHits} images.`, paramsForNotify);
+            }
         };
         createMarkup(searchResults);
         lightbox.refresh();
