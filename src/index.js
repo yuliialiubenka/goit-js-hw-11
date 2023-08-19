@@ -12,7 +12,7 @@ let currentPage = 1;
 const perPage = 40;
 let firstLoad = true;
 
-const paramsForNotify = {
+export const paramsForNotify = {
     position: 'center-center',
     timeout: 3000,
     width: '400px',
