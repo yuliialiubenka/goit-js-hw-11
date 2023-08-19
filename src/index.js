@@ -1,5 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import axios from 'axios';
+import { fetchImage } from './js/api';
 import { createMarkup } from './js/markup';
 import { lightbox } from './js/lightbox';
 
@@ -7,9 +7,6 @@ export const gallery = document.querySelector('.gallery');
 const form = document.querySelector('.search-form');
 const input = document.querySelector('input');
 const loadMoreBtn = document.querySelector('.load-more');
-
-const KEY = '38889455-fd8af79455bb4793a4bd4120e';
-const URL = 'https://pixabay.com/api/';
 
 let currentPage = 1;
 const perPage = 40;
@@ -38,40 +35,23 @@ function addImgItemsList(event) {
 };
 
 async function searchImage(searchText, currentPage) {
-    try {
-        const response = await axios.get(URL, {
-            params: {
-                key: KEY,
-                q: searchText,
-                per_page: perPage,
-                page: currentPage,
-                image_type: 'photo',
-                orientation: 'horizontal',
-                safesearch: true,
-            }
-        });
+    const response = await fetchImage(searchText, currentPage, perPage);
+    const responseData = response.data;
+    const totalHits = responseData.totalHits;
+    const hitsLength = responseData.hits.length;
 
-        const responseData = await response.data;
-        const totalHits = responseData.totalHits;
-        const hitsLength = responseData.hits.length;
+    if (totalHits > perPage) {
+        colectionValidator(currentPage, perPage, totalHits);
+    };
 
-        if (totalHits > perPage) {
-            colectionValidator(currentPage, perPage, totalHits);
-        };
-
-        if (hitsLength === 0) {
-            Notify.failure('Sorry, there are no images matching your search query. Please try again.', paramsForNotify);
-            return;
-        } else if (searchText.trim() === '') {
-            Notify.info('Enter your request, please!', paramsForNotify);
-            return;
-        } else {
-            console.log(responseData);
-            return responseData;
-        }
-
-    } catch (error) {
-        Notify.failure('Oops! Something went wrong! Try reloading the page or make another choice!', paramsForNotify);
+    if (hitsLength === 0) {
+        Notify.failure('Sorry, there are no images matching your search query. Please try again.', paramsForNotify);
+        return;
+    } else if (searchText.trim() === '') {
+        Notify.info('Enter your request, please!', paramsForNotify);
+        return;
+    } else {
+        return responseData;
     }
 };
 
