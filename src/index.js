@@ -35,23 +35,27 @@ function addImgItemsList(event) {
 };
 
 async function searchImage(searchText, currentPage) {
-    const response = await fetchImage(searchText, currentPage, perPage);
-    const responseData = response.data;
-    const totalHits = responseData.totalHits;
-    const hitsLength = responseData.hits.length;
+    try {
+        const response = await fetchImage(searchText, currentPage, perPage);
+        const responseData = response.data;
+        const totalHits = responseData.totalHits;
+        const hitsLength = responseData.hits.length;
 
-    if (totalHits > perPage) {
-        colectionValidator(currentPage, perPage, totalHits);
-    };
+        if (totalHits > perPage) {
+            colectionValidator(currentPage, perPage, totalHits);
+        };
 
-    if (hitsLength === 0) {
-        Notify.failure('Sorry, there are no images matching your search query. Please try again.', paramsForNotify);
-        return;
-    } else if (searchText.trim() === '') {
-        Notify.info('Enter your request, please!', paramsForNotify);
-        return;
-    } else {
-        return responseData;
+        if (hitsLength === 0) {
+            Notify.failure('Sorry, there are no images matching your search query. Please try again.', paramsForNotify);
+            return;
+        } else if (searchText.trim() === '') {
+            Notify.info('Enter your request, please!', paramsForNotify);
+            return;
+        } else {
+            return responseData;
+        }
+    } catch (error) {
+        Notify.failure('Oops! Something went wrong! Try reloading the page or make another choice!', paramsForNotify);
     }
 };
 
