@@ -19,15 +19,12 @@ img {
 }
 
 .search-form {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     display: flex;
     gap: 30px;
     align-items: center;
     justify-content: center;
-    padding: 20px 0 20px 0;
+    padding: 20px;
     background: rgba(214, 250, 185, 1);
     box-shadow: 0px 4px 10px 0px rgb(166, 202, 136);
 }
@@ -64,8 +61,7 @@ button:hover {
 }
 
 .gallery {
-    margin-top: 100px;
-    margin-bottom: 16px;
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -109,5 +105,42 @@ button:hover {
         display: flex;
         flex-direction: column;
         font-size: 14px;
+    }
+}
+
+.to-top-arrow {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-width: fit-content;
+    display: none;
+    
+    &-link {
+        position: relative;
+        z-index: 111;
+        display: block;
+        border-radius: 50%;
+        background: #265003;
+        padding: 10px;
+        box-shadow: 0px 0px 8px 0px rgba(81, 133, 234, 0.21);
+        transition: box-shadow 0.25s ease-in-out;
+
+        &:hover {
+            box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
+        }
+    }
+
+    &-icon {
+        display: block;
+    }
+
+    &-shadow {
+        position: absolute;
+        top: 0;
+        left:0;
+        width: 44px;
+        height: 44px;
+        background: #DBE2FF;
+        filter: blur(20px); 
     }
 }

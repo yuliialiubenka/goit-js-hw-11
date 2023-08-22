@@ -34,7 +34,6 @@ export async function fetchImage(searchText, currentPage, perPage) {
             orientation: 'horizontal',
             safesearch: true,
         });
-        console.log(params);
         return await axios.get(`${URL}?${params}`);
           
     } catch (error) {

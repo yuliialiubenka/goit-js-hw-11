@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 11</title>
+    <title>SearchQuery</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.png" />
     <link rel="stylesheet" href="./sass/index.scss" />
     <script type="module" src="./index.js"></script>
   </head>
@@ -20,5 +21,15 @@
     <div class="gallery">
     </div>
     <button type="button" class="load-more is-hidden">Load more</button>
+
+    <div class="to-top-arrow" id="toTopArrow">
+      <div class="to-top-arrow-shadow"></div>
+      <a class="to-top-arrow-link" href="#search-form">
+          <svg class="to-top-arrow-icon" width="24" height="24" fill="none">
+            <path d="M12 19V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 12L12 5L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+      </a>
+    </div>
   </body>
 </html>

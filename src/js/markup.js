@@ -3,7 +3,7 @@ import { gallery } from '../index';
 export function createMarkup(searchResults) {
     let photosArray = searchResults.map(({ largeImageURL, webformatURL, tags, likes, views, comments, downloads}) => {
         return `
-        <div class="photo-card">
+        <div class="photo-card animate__animated animate__bounceInUp">
             <div class="img-wrap">
                 <a class="gallery-link" href="${largeImageURL}">
                     <img src="${webformatURL}" alt="${tags}" width="300" loading="lazy" />

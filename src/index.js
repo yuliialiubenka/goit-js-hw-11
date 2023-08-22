@@ -1,3 +1,4 @@
+import 'animate.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchImage } from './js/api';
 import { createMarkup } from './js/markup';
@@ -97,14 +98,46 @@ function colectionValidator(currentPage, perPage, totalHits) {
 };
 
 function liteScrol() {
-    if (!firstLoad) {
+    if (!firstLoad && scrollY > 200) {
         const { height: cardHeight } = gallery.firstElementChild.getBoundingClientRect();
   
         window.scrollBy({
-        top: cardHeight / 2,
+        top: cardHeight * 2,
         behavior: "smooth",
         });
     } else {
         firstLoad = false;
     }
 };
+
+function scrollToTop() {
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("toTopArrow").style.display = "block";
+        } else {
+            document.getElementById("toTopArrow").style.display = "none";
+        }
+    } 
+    smoothScroll();
+}
+
+scrollToTop();
+
+function smoothScroll() {
+    const anchors = document.querySelectorAll('a[href*="#"]');
+
+    for (let anchor of anchors) {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+        
+            const blockID = anchor.getAttribute('href').substr(1)
+        
+            document.getElementById(blockID).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            })
+        })
+    }
+}
